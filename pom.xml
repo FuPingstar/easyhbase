@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--<groupId>com.xcar.service</groupId>-->
+    <!--<artifactId>easyhbase</artifactId>-->
+    <!--&lt;!&ndash;<version>0.1.4-hdp</version>&ndash;&gt;-->
+    <!--<version>0.1.4-tx</version>-->
+    <!--&lt;!&ndash;<version>0.1.4</version>&ndash;&gt;-->
+
+
+    <groupId>com.xcar.data</groupId>
+    <artifactId>easyhbase</artifactId>
+    <!--<version>0.1.4-hdp</version>-->
+    <version>0.1.4-tx</version>
+    <!--<version>0.1.4</version>-->
+    <packaging>jar</packaging>
+
+    <!--项目发布到私服-->
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>releases</name>
+            <!--<url>http://maven.xcar.com.cn:8888/nexus/content/repositories/releases/</url>-->
+            <url>http://registry.maven.op.xcar.com.cn:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--指定Java编译版本-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <junit.version>4.11</junit.version>
+        <lombok.version>1.16.18</lombok.version>
+        <fastjson.version>1.2.47</fastjson.version>
+        <cdh.hbase.version>1.2.0-cdh5.7.0</cdh.hbase.version>
+        <hdp.hbase.version>1.1.2.2.6.5.0-292</hdp.hbase.version>
+        <tx.hbase.version>1.3.1</tx.hbase.version>
+        <hdp.phoenix.version>4.7.0.2.6.5.0-292</hdp.phoenix.version>
+    </properties>
+
+    <dependencies>
+        <!--单元测试-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--hbase 依赖-->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>${tx.hbase.version}</version>
+        </dependency>
+        <!--美化Java代码-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- 解析Json 数据 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--   要将源码放上去，需要加入这个插件    -->
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--配置仓库-->
+    <repositories>
+        <!--cdh 加速-->
+        <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </repository>
+        <repository>
+            <id>Hortonworks</id>
+            <url>http://repo.hortonworks.com/content/repositories/releases/</url>
+        </repository>
+
+        <!--hdp 加速-->
+        <repository>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>hortonworks.extrepo</id>
+            <name>Hortonworks HDP</name>
+            <url>http://repo.hortonworks.com/content/repositories/releases</url>
+        </repository>
+
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>hortonworks.other</id>
+            <name>Hortonworks Other Dependencies</name>
+            <url>http://repo.hortonworks.com/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <!--maven插件源加速-->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>hortonworks.extrepo</id>
+            <name>Hortonworks HDP</name>
+            <url>http://repo.hortonworks.com/content/repositories/releases</url>
+        </pluginRepository>
+
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>hortonworks.other</id>
+            <name>Hortonworks Other Dependencies</name>
+            <url>http://repo.hortonworks.com/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
