@@ -38,3 +38,4 @@ buildNumber.properties
 
 # IDE
 .idea/
+*.ffs_db
